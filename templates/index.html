@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bharat Heritage | Explore India's Living Culture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="topbar">🇮🇳 Celebrating India's Living Heritage <button onclick="scrollToId('contribute')">Share your story →</button></div>
+
+<header class="navbar">
+  <a class="brand" href="#"><span class="logo">BH</span><span><b>Bharat</b><small>HERITAGE</small></span></a>
+  <nav><a href="#explore">Explore</a><a href="#map">Heritage Map</a><a href="#stories">Stories</a><a href="#guides">Local Guides</a><a href="#about">About</a></nav>
+  <div class="nav-actions"><button id="themeBtn" class="round">☼</button><button class="login" onclick="openModal('loginModal')">Login</button><button class="hamb" onclick="toggleNav()">☰</button></div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <span class="eyebrow">DISCOVER • UNDERSTAND • PRESERVE</span>
+    <h1>India's heritage<br><em>lives here.</em></h1>
+    <p>Explore traditions, folk arts, festivals, sacred places and stories — all in one beautiful cultural journey.</p>
+    <div class="search"><span>⌕</span><input id="searchInput" placeholder="Search a tradition, festival, dance, temple..." onkeydown="if(event.key==='Enter') searchSite()"><button onclick="searchSite()">Explore</button></div>
+    <div class="trending"><span>Trending:</span><button onclick="quick('Yellamma')">Yellamma</button><button onclick="quick('Gondhal')">Gondhal</button><button onclick="quick('Lavani')">Lavani</button><button onclick="quick('Jagar')">Jagar</button></div>
+  </div>
+  <div class="scroll">SCROLL TO EXPLORE ↓</div>
+</section>
+
+<section class="section" id="explore">
+  <div class="head"><div><span class="eyebrow dark">START EXPLORING</span><h2>What are you curious about?</h2></div><button class="link" onclick="openModal('interestModal')">Personalize my journey →</button></div>
+  <div class="categories">
+    <button class="category active" onclick="filter('all',this)">✦<b>All Heritage</b><small>Explore everything</small></button>
+    <button class="category" onclick="filter('dance',this)">◈<b>Folk Dance</b><small>Movement & expression</small></button>
+    <button class="category" onclick="filter('music',this)">♫<b>Folk Music</b><small>Sounds & instruments</small></button>
+    <button class="category" onclick="filter('festival',this)">✺<b>Festivals</b><small>Celebrations & rituals</small></button>
+    <button class="category" onclick="filter('temple',this)">⌂<b>Temples</b><small>Sacred places</small></button>
+    <button class="category" onclick="filter('craft',this)">◇<b>Art & Craft</b><small>Hands & heritage</small></button>
+    <button class="category" onclick="filter('story',this)">❧<b>Folk Stories</b><small>Voices & memories</small></button>
+    <button class="category" onclick="filter('food',this)">◌<b>Traditional Food</b><small>Taste of India</small></button>
+  </div>
+</section>
+
+<section class="section dark" id="discover">
+  <div class="head"><div><span class="eyebrow">FEATURED HERITAGE</span><h2>Stories worth discovering</h2></div><button class="outline" onclick="loadTraditions('all')">View all →</button></div>
+  <div id="cards" class="cards"></div>
+</section>
+
+<section class="section map-section" id="map">
+  <div><span class="eyebrow dark">EXPLORE BY PLACE</span><h2>Find heritage<br>around you.</h2><p>Discover cultural places and living practices across India.</p><button class="primary" onclick="findLocation()">⌖ Explore near me</button><div class="stats"><b>28+<small>States covered</small></b><b>150+<small>Traditions</small></b><b>500+<small>Places</small></b></div></div>
+  <div class="map"><div class="india"><span class="pin one">●<small>Maharashtra</small></span><span class="pin two">●<small>Karnataka</small></span><span class="pin three">●<small>Rajasthan</small></span><span class="pin four">●<small>West Bengal</small></span><span class="pin five">●<small>Kerala</small></span><b>INDIA</b></div><div class="map-card">📍 <span><b>Heritage near you</b><small id="locationText">Allow location to discover nearby culture</small></span></div></div>
+</section>
+
+<section class="section ai" id="ai">
+  <div class="ai-grid"><div><span class="ai-orb">✦</span><span class="eyebrow">BHARAT AI</span><h2>Ask. Discover.<br><em>Understand.</em></h2><p>Ask questions about Indian traditions, history and related cultural practices.</p><div class="suggestions"><button onclick="ask('Why is Gondhal performed?')">Why is Gondhal performed?</button><button onclick="ask('What is Yellamma?')">What is Yellamma?</button><button onclick="ask('What is related to Jagar?')">Related to Jagar?</button></div></div>
+  <div class="chat"><div class="chat-head">🟢 Bharat AI <small>Cultural Guide</small></div><div class="chat-body" id="chatBody"><div class="bubble">Namaste! 👋<br>Ask me anything about India's cultural heritage.</div></div><div class="chat-input"><input id="chatInput" placeholder="Ask about a tradition..." onkeydown="if(event.key==='Enter')sendChat()"><button onclick="sendChat()">↑</button></div></div></div>
+</section>
+
+<section class="section" id="stories"><div class="head"><div><span class="eyebrow dark">VOICES OF INDIA</span><h2>Stories from the people</h2></div></div><div class="stories"><article><div class="story-img"></div><div class="story-copy"><span>LOCAL VOICES · MAHARASHTRA</span><h3>“A tradition is not just an event. It is a memory passed forward.”</h3><p>Discover first-hand experiences, family traditions and local stories shared by communities.</p><button class="link" onclick="scrollToId('contribute')">Share a story →</button></div></article><div class="story-list"><div><b>FOLK MUSIC</b><h4>The instruments that carry a village's voice</h4></div><div><b>TRADITION</b><h4>How rituals change while keeping their soul</h4></div><div><b>FOOD</b><h4>A festival plate tells a story too</h4></div></div></div></section>
+
+<section class="section" id="guides"><div class="head"><div><span class="eyebrow dark">LOCAL KNOWLEDGE</span><h2>Learn from local voices</h2></div></div><div class="guides"><div class="guide"><i>S</i><div><h3>Shankar Patil</h3><span>Folk Culture Expert · Kolhapur</span><p>Marathi · Hindi</p></div><button onclick="toast('Guide profile opened')">View profile</button></div><div class="guide"><i>L</i><div><h3>Lakshmi Desai</h3><span>Temple & Tradition Guide · Belagavi</span><p>Kannada · Hindi</p></div><button onclick="toast('Guide profile opened')">View profile</button></div><div class="guide"><i>R</i><div><h3>Ramesh Jadhav</h3><span>Cultural Researcher · Mahur</span><p>Marathi · English</p></div><button onclick="toast('Guide profile opened')">View profile</button></div></div></section>
+
+<section class="contribute" id="contribute"><div><span class="eyebrow">PRESERVE TOGETHER</span><h2>Your experience<br>is part of heritage.</h2><p>Share a local story, photograph, song, ritual or tradition that deserves to be remembered.</p><div class="checks">✓ Community stories &nbsp; ✓ Local languages &nbsp; ✓ Photos & audio</div></div><form id="experienceForm"><h3>✦ Share your experience</h3><label>Tradition<select id="tradition"><option>Yellamma</option><option>Gondhal</option><option>Jagar</option><option>Lavani</option><option>Other</option></select></label><div class="two"><label>Location<input id="expLocation" required placeholder="City / Village"></label><label>Language<select id="language"><option>Marathi</option><option>Hindi</option><option>English</option><option>Kannada</option></select></label></div><label>Your experience<textarea id="experience" required rows="4" placeholder="Tell us your story..."></textarea></label><button class="primary full">Submit for verification →</button></form></section>
+
+<section class="section about" id="about"><span class="eyebrow dark">OUR PURPOSE</span><h2>Not just a database.<br><em>A living cultural memory.</em></h2><p>We bring together cultural knowledge, maps, stories, media and community voices to make India's diverse heritage easier to discover — and easier to preserve.</p></section>
+
+<footer><div class="brand"><span class="logo">BH</span><span><b>Bharat</b><small>HERITAGE</small></span></div><div>Explore · Map · Stories · Guides · About</div><small>© 2026 Bharat Heritage</small></footer>
+
+<div class="modal" id="searchModal"><div class="modal-box"><button class="close" onclick="closeModal('searchModal')">×</button><span class="eyebrow dark">SEARCH RESULTS</span><h2 id="searchTitle">Explore</h2><div id="results"></div></div></div>
+<div class="modal" id="interestModal"><div class="modal-box"><button class="close" onclick="closeModal('interestModal')">×</button><span class="eyebrow dark">PERSONALIZE</span><h2>What do you love?</h2><div class="interest-grid"><button>💃 Folk Dance</button><button>🎵 Music</button><button>🎉 Festivals</button><button>🛕 Temples</button><button>🎭 Theatre</button><button>🧵 Crafts</button><button>📖 Stories</button><button>🍲 Food</button></div><button class="primary full" onclick="closeModal('interestModal');toast('Your interests are saved!')">Save my interests →</button></div></div>
+<div class="modal" id="loginModal"><div class="modal-box"><button class="close" onclick="closeModal('loginModal')">×</button><span class="eyebrow dark">WELCOME BACK</span><h2>Login to Bharat Heritage</h2><label>Email<input type="email" placeholder="you@example.com"></label><label>Password<input type="password" placeholder="••••••••"></label><button class="primary full" onclick="closeModal('loginModal');toast('Demo login successful')">Login →</button></div></div>
+<div id="toast"></div>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body></html>
